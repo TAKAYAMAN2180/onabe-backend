@@ -5,7 +5,7 @@ from db import adddata,getalldata,addanswer
 
 app = Flask(__name__)
 
-CORS(app,origins=["https://onabe-front-front.vercel.app"], methods=["POST","GET"])
+CORS(app,origins=["https://onabe-front-front.vercel.app","http://localhost:3000/"], methods=["POST","GET"])
 
 # ルートページのハンドラ
 @app.route('/wordpost',methods=['POST'])
