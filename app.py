@@ -47,7 +47,7 @@ def newanswer():
     addanswer(id,answer,date)
     #return jsonify({"message": "Operation successful"}), 200
 
-@app.route('/getquestion',methods=['GET'])
+@app.route('/idquestion',methods=['POST'])
 def getidquestion():
     id = request.json.get('id')
     data=getiddata(id)
