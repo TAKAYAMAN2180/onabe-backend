@@ -35,7 +35,7 @@ def getalldata():
     # データベース接続を閉じる
     conn.close()
 
-    data_list = [{"id":row[0], "keyword": row[1], "question": row[2],"createdAt":row[3],"answer":row[4]} for row in rows]
+    data_list = [{"id":row[0], "keyword": row[1], "question": row[2],"createdAt":row[3],"answer":row[4],"answerAt":row[5]} for row in rows]
 
     return data_list
 
@@ -62,7 +62,7 @@ def addclass():
     c = conn.cursor()
 
     # `questions`テーブルに`answer`カラムを追加（TEXT型として）
-    c.execute("ALTER TABLE questions ADD COLUMN created_at DATETIME")
+    c.execute("ALTER TABLE questions ADD COLUMN answer_at DATETIME")
 
     # 変更をコミット
     conn.commit()
@@ -70,12 +70,12 @@ def addclass():
     # データベース接続を閉じる
     conn.close()
 
-def addanswer(question_id,answer_text):
+def addanswer(question_id,answer_text,date):
     # データベースに接続
     conn = sqlite3.connect('example.sqlite')
     c = conn.cursor()
 
-    c.execute("UPDATE questions SET answer = ? WHERE id = ?", (answer_text, question_id))
+    c.execute("UPDATE questions SET answer = ? answer_at = ? WHERE id = ?", (answer_text,date,question_id))
 
     # 変更をコミット
     conn.commit()

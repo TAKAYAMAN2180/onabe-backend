@@ -42,7 +42,8 @@ def deletedata():
 def newanswer():
     id = request.json.get('id')
     answer = request.json.get('answer') 
-    addanswer(id,answer)
+    date = request.json.get('answerAt')
+    addanswer(id,answer,date)
 
 if __name__ == '__main__':
     app.run(debug=True,port=8000)
