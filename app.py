@@ -38,7 +38,7 @@ def jsonalldata():
 def deletedata():
     deletedata()
 
-@app.route('/wordpost',methods=['POST'])
+@app.route('/addanswer',methods=['POST'])
 def newanswer():
     id = request.json.get('id')
     answer = request.json.get('answer') 
