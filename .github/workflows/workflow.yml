@@ -49,5 +49,5 @@ jobs:
           chmod 600 private_key
           ssh -oStrictHostKeyChecking=no ${{ secrets.EC2_USER_NAME }}@${{ secrets.EC2_HOST_NAME }} -i private_key "cd ~/onabe-backend/ && git fetch --prune && git checkout main && git pull origin main && docker-compose up --build -d"
 
-          sleep　5s
+          sleep 5s
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
