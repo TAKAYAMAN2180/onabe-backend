@@ -1,9 +1,10 @@
 # openai, osインポート
 import os
 import openai
-#load_dotenv()
-openai.api_key = ""
-#os.environ["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"]
+from dotenv import load_dotenv
+
+load_dotenv()
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 # ユーザーからの質問に回答する関数
 def cre_word(keyword): # lang: ユーザの使用言語, user_que: 元(ユーザの)言語の質問

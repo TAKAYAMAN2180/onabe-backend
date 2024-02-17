@@ -1,4 +1,5 @@
 import sqlite3
+import json
 
 def newdata():
     # データベースに接続する
@@ -11,6 +12,8 @@ def newdata():
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, category TEXT, question TEXT)''')
     # 変更をコミット（保存）する
     conn.commit()
+    conn.close()
+
 def adddata(questiondict):
     conn = sqlite3.connect('example.sqlite')
     c = conn.cursor()
@@ -18,10 +21,40 @@ def adddata(questiondict):
         for question in questions:
             c.execute("INSERT INTO questions (category, question) VALUES (?, ?)", (category, question))
     conn.commit()
+    conn.close()
 
 
 def getalldata():
-    pass
+    # データベースに接続
+    conn = sqlite3.connect('example.sqlite')
+    c = conn.cursor()
 
+    # 全てのデータを選択
+    c.execute("SELECT * FROM questions")
+    rows = c.fetchall()
 
-newdata()
+    # データベース接続を閉じる
+    conn.close()
+
+    data_list = [{"id":row[0], "question": row[2], "keyword": row[2]} for row in rows]
+
+    return data_list
+
+def deletedata():
+    # 削除したいレコードのIDを設定
+    your_id_variable = 8  # ここに実際のIDを設定
+
+    # データベースに接続
+    conn = sqlite3.connect('example.sqlite')
+    c = conn.cursor()
+
+    # 指定したIDのデータを削除
+    c.execute("DELETE FROM questions WHERE id = ?", (your_id_variable,))
+
+    # 変更をコミット
+    conn.commit()
+
+    # データベース接続を閉じる
+    conn.close()
+
+deletedata()
