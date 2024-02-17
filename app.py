@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from chatgpt import cre_word,cre_question
-from db import adddata,getalldata,addanswer
+from db import adddata,getalldata,getiddata,addanswer
 
 app = Flask(__name__)
 
@@ -47,6 +47,12 @@ def newanswer():
     addanswer(id,answer,date)
     #return jsonify({"message": "Operation successful"}), 200
 
+@app.route('/getquestion',methods=['GET'])
+def getidquestion():
+    id = request.json.get('id')
+    data=getiddata(id)
+    return  jsonify(data)
+    
 
 if __name__ == '__main__':
     app.run(debug=True,port=8000)

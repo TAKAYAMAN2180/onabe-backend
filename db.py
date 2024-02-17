@@ -39,6 +39,33 @@ def getalldata():
 
     return data_list
 
+def getiddata(question_id):
+    # データベースに接続
+    conn = sqlite3.connect('example.sqlite')
+    c = conn.cursor()
+
+    # idでデータを選択
+    c.execute("SELECT * FROM questions WHERE id=?", (question_id,))  # パラメータはタプルとして渡す
+    row = c.fetchone()  # idはユニークなので、一致するのは最大で1行のみ
+
+    # データベース接続を閉じる
+    conn.close()
+
+    # 結果が存在すれば、その行のデータで辞書を作成
+    if row:
+        data = {
+            "id": row[0],
+            "keyword": row[1],  
+            "question": row[2],
+            "answer": row[3],
+            "createdAt": row[4],
+            "answeredAt": row[5]
+        }
+        return data
+    else:
+        return None  # 結果がなければ、Noneを返す
+
+
 def deletedata():
     # 削除したいレコードのIDを設定
     your_id_variable = 8  # ここに実際のIDを設定
