@@ -1,5 +1,4 @@
 import sqlite3
-import json
 
 def newdata():
     # データベースに接続する
@@ -57,4 +56,29 @@ def deletedata():
     # データベース接続を閉じる
     conn.close()
 
-deletedata()
+def addclass():
+    # データベースに接続
+    conn = sqlite3.connect('example.sqlite')
+    c = conn.cursor()
+
+    # `questions`テーブルに`answer`カラムを追加（TEXT型として）
+    c.execute("ALTER TABLE questions ADD COLUMN answer TEXT")
+
+    # 変更をコミット
+    conn.commit()
+
+    # データベース接続を閉じる
+    conn.close()
+
+def addanswer(question_id,answer_text):
+    # データベースに接続
+    conn = sqlite3.connect('example.sqlite')
+    c = conn.cursor()
+
+    c.execute("UPDATE questions SET answer = ? WHERE id = ?", (answer_text, question_id))
+
+    # 変更をコミット
+    conn.commit()
+
+    # データベース接続を閉じる
+    conn.close()
