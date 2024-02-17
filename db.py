@@ -75,7 +75,7 @@ def addanswer(question_id,answer_text,date):
     conn = sqlite3.connect('example.sqlite')
     c = conn.cursor()
 
-    c.execute("UPDATE questions SET answer = ? answer_at = ? WHERE id = ?", (answer_text,date,question_id))
+    c.execute("UPDATE questions SET answer = ?, answer_at = ? WHERE id = ?", (answer_text,date,question_id))
 
     # 変更をコミット
     conn.commit()
