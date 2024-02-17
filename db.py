@@ -35,7 +35,7 @@ def getalldata():
     # データベース接続を閉じる
     conn.close()
 
-    data_list = [{"id":row[0], "keyword": row[1], "question": row[2],"createdAt":row[3],"answer":row[4],"answerAt":row[5]} for row in rows]
+    data_list = [{"id":row[0], "keyword": row[1], "question": row[2],"answer":row[3],"createAt":row[4],"answerAt":row[5]} for row in rows]
 
     return data_list
 
