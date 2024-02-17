@@ -82,5 +82,3 @@ def addanswer(question_id,answer_text):
 
     # データベース接続を閉じる
     conn.close()
-
-addclass()
