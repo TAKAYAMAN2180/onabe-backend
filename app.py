@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from chatgpt import cre_word,cre_question
-from db import adddata
+from db import adddata,getalldata,deletedata
 
 app = Flask(__name__)
 CORS(app,origins=["http://localhost:3000"], methods=["POST","GET"])
@@ -25,32 +25,15 @@ def keywordtoquestion():
     
 
 @app.route('/getall',methods=['GET'])
-def jsonalltest():
+def jsonalldata():
      
-    test_api = {
-        'qtext': 'It is test. where is hospital?',
-        'lang': 'english'
-        }
+    data=getalldata()
 
-    return jsonify(test_api)
+    return jsonify(data)
 
-@app.route('/jsontest')
-def form_interface():
-
-    testtext = request.json.get("test")
-
-    return jsonify(testtext)
-
-@app.route('/test')
-def jsontest():
-
-    test_api = {
-        'qtext': 'It is test. where is hospital?',
-        'lang': 'english'
-        }
-
-    return jsonify(test_api)
-
+@app.route('/delete',methods=['GET'])
+def deleteselectdata():
+    deletedata()
 
 
 if __name__ == '__main__':
