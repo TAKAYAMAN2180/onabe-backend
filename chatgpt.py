@@ -2,7 +2,7 @@
 import os
 import openai
 #load_dotenv()
-openai.api_key = "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"
+openai.api_key = ""
 #os.environ["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"]
 
 # ユーザーからの質問に回答する関数
