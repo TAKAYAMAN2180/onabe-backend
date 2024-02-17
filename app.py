@@ -44,6 +44,7 @@ def newanswer():
     answer = request.json.get('answer') 
     date = request.json.get('answerAt')
     addanswer(id,answer,date)
+    return 
 
 if __name__ == '__main__':
     app.run(debug=True,port=8000)
