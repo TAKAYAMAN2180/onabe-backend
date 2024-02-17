@@ -62,7 +62,7 @@ def addclass():
     c = conn.cursor()
 
     # `questions`テーブルに`answer`カラムを追加（TEXT型として）
-    c.execute("ALTER TABLE questions ADD COLUMN answer TEXT")
+    c.execute("ALTER TABLE questions ADD COLUMN created_at DATETIME")
 
     # 変更をコミット
     conn.commit()
@@ -82,3 +82,5 @@ def addanswer(question_id,answer_text):
 
     # データベース接続を閉じる
     conn.close()
+
+addclass()
