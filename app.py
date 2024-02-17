@@ -45,7 +45,7 @@ def newanswer():
     answer = request.json.get('answer') 
     date = request.json.get('answerAt')
     addanswer(id,answer,date)
-    return jsonify({"message": "Operation successful"}), 200
+    #return jsonify({"message": "Operation successful"}), 200
 
 
 if __name__ == '__main__':
