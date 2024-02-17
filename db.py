@@ -13,12 +13,12 @@ def newdata():
     conn.commit()
     conn.close()
 
-def adddata(questiondict):
+def adddata(questiondict,date):
     conn = sqlite3.connect('example.sqlite')
     c = conn.cursor()
     for category, questions in questiondict.items():
         for question in questions:
-            c.execute("INSERT INTO questions (category, question) VALUES (?, ?)", (category, question))
+            c.execute("INSERT INTO questions (category, question,created_at) VALUES (?, ?, ?)", (category, question ,date))
     conn.commit()
     conn.close()
 

@@ -12,6 +12,7 @@ CORS(app)
 @app.route('/wordpost',methods=['POST'])
 def keywordtoquestion():
     user_input = request.json.get('keyword')
+    user_date = request.json.get('createdAt')
     if not user_input:
         return jsonify({"error": "No message provided"}), 400
     questionlist = cre_word(user_input)
@@ -22,7 +23,7 @@ def keywordtoquestion():
     for geneword in questionlist:
         genequestiondict[geneword]=cre_question(geneword)
 
-    adddata(genequestiondict)
+    adddata(genequestiondict,user_date)
     return 
     
 
