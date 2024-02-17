@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from chatgpt import cre_word,cre_question
-from db import adddata,getalldata,deletedata
+from db import adddata,getalldata
 
 app = Flask(__name__)
 CORS(app,origins=["http://localhost:3000"], methods=["POST","GET"])
@@ -32,7 +32,7 @@ def jsonalldata():
     return jsonify(data)
 
 @app.route('/delete',methods=['GET'])
-def deleteselectdata():
+def deletedata():
     deletedata()
 
 
