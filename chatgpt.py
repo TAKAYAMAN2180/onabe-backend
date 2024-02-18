@@ -11,8 +11,8 @@ def cre_word(keyword): # lang: ユーザの使用言語, user_que: 元(ユーザ
     response_question = openai.ChatCompletion.create(
         model = "gpt-4-1106-preview",
         messages = [
-            {"role": "system", "content": "キーワードに関連する言葉を5つ出力してください。"},
-            {"role": "system", "content": "例)キーワード:学校であれば教室,授業,先生,机,テスト"},
+            {"role": "system", "content": "キーワードに関連する言葉をキーワードを含めて5つ出力してください。"},
+            {"role": "system", "content": "例)キーワード:学校であれば学校,教室,授業,先生,机,テスト"},
             {"role": "system", "content": "キーワードについて良くわからない場合は「本当に良くわからない」と出力してください"},
             {"role": "user", "content": "キーワード:"+keyword},
         ],
@@ -25,7 +25,7 @@ def cre_word(keyword): # lang: ユーザの使用言語, user_que: 元(ユーザ
     
     return gpt_output
    
-#test1=cre_word("コンセント")
+#test1=cre_word("たこ焼き")
 #print(test1)
 
 def cre_question(geneword):
