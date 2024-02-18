@@ -60,7 +60,7 @@ def postscrapbox():
     question=request.json.get('question')
     keyword=request.json.get('pageTitle')
     scrapboxdict[keyword]=question
-    adddata(scrapboxdict,datetime.datetime)
+    adddata(scrapboxdict,datetime.datetime.now())
     return jsonify({"message": "Operation successful"}), 200
 
 
