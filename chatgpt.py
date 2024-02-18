@@ -13,14 +13,19 @@ def cre_word(keyword): # lang: ユーザの使用言語, user_que: 元(ユーザ
         messages = [
             {"role": "system", "content": "キーワードに関連する言葉を5つ出力してください。"},
             {"role": "system", "content": "例)キーワード:学校であれば教室,授業,先生,机,テスト"},
+            {"role": "system", "content": "キーワードについて良くわからない場合は「本当に良くわからない」と出力してください"},
             {"role": "user", "content": "キーワード:"+keyword},
         ],
     )
-    gpt_question=response_question.choices[0]["message"]["content"].strip().split(",")
+    
+    gpt_output=response_question.choices[0]["message"]["content"].strip().split(",")
 
-    return gpt_question
+    if gpt_output == ['本当に良くわからない。'] or gpt_output == ['本当に良くわからない']:
+        return None
+    
+    return gpt_output
    
-#test1=cre_word("電気")
+#test1=cre_word("コンセント")
 #print(test1)
 
 def cre_question(geneword):

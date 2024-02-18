@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from chatgpt import cre_word,cre_question
 from db import adddata,getalldata,getiddata,addanswer
+import datetime
 
 app = Flask(__name__)
 
@@ -16,8 +17,6 @@ def keywordtoquestion():
     if not user_input:
         return jsonify({"error": "No message provided"}), 400
     questionlist = cre_word(user_input)
-    print(questionlist)
-    print(type(questionlist))
     #リストをdbに保存していく
     genequestiondict={}
     for geneword in questionlist:
@@ -53,6 +52,15 @@ def getidquestion():
     data=getiddata(id)
     return  jsonify(data)
     
+@app.route('/scrapquestion',methods=['POST'])
+def postscrapbox():
+    scrapboxdict={}
+    question=request.json.get('question')
+    keyword=request.json.get('pageTitle')
+    scrapboxdict[keyword]=question
+    adddata(scrapboxdict,datetime.datetime)
+    return jsonify({"message": "Operation successful"}), 200
+
 
 if __name__ == '__main__':
     app.run(debug=True,port=8000)
