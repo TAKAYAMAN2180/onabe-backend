@@ -17,6 +17,8 @@ def keywordtoquestion():
     if not user_input:
         return jsonify({"error": "No message provided"}), 400
     questionlist = cre_word(user_input)
+    if questionlist is None:
+        return jsonify({"message": "Operation successful"}), 200
     #リストをdbに保存していく
     genequestiondict={}
     for geneword in questionlist:
