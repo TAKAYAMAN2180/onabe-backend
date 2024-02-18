@@ -22,6 +22,14 @@ def adddata(questiondict,date):
     conn.commit()
     conn.close()
 
+def addscrapdata(questiondict,date):
+    conn = sqlite3.connect('example.sqlite')
+    c = conn.cursor()
+    for category, question in questiondict.items():
+        c.execute("INSERT INTO questions (category, question,created_at) VALUES (?, ?, ?)", (category, question ,date))
+    conn.commit()
+    conn.close()
+
 
 def getalldata():
     # データベースに接続

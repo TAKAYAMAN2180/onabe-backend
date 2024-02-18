@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from chatgpt import cre_word,cre_question
-from db import adddata,getalldata,getiddata,addanswer
+from db import adddata,getalldata,getiddata,addanswer,addscrapdata
 import datetime
 
 app = Flask(__name__)
@@ -60,7 +60,7 @@ def postscrapbox():
     question=request.json.get('question')
     keyword=request.json.get('pageTitle')
     scrapboxdict[keyword]=question
-    adddata(scrapboxdict,datetime.datetime.now())
+    addscrapdata(scrapboxdict,datetime.datetime.now())
     return jsonify({"message": "Operation successful"}), 200
 
 
