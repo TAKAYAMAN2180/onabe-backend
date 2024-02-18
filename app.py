@@ -22,7 +22,7 @@ def keywordtoquestion():
     genequestiondict={}
     for geneword in questionlist:
         genequestiondict[geneword]=cre_question(geneword)
-
+    
     adddata(genequestiondict,user_date)
     return jsonify({"message": "Operation successful"}), 200
 
@@ -45,7 +45,7 @@ def newanswer():
     answer = request.json.get('answer') 
     date = request.json.get('answerAt')
     addanswer(id,answer,date)
-    #return jsonify({"message": "Operation successful"}), 200
+    return jsonify({"message": "Operation successful"}), 200
 
 @app.route('/idquestion',methods=['POST'])
 def getidquestion():
