@@ -52,7 +52,7 @@ def getidquestion():
     data=getiddata(id)
     return  jsonify(data)
     
-@app.route('/idquestion',methods=['POST'])
+@app.route('/scrapquestion',methods=['POST'])
 def postscrapbox():
     scrapboxdict={}
     question=request.json.get('question')

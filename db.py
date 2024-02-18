@@ -107,5 +107,43 @@ def addanswer(question_id,answer_text,date):
     # 変更をコミット
     conn.commit()
 
+    # データベース接続を閉じる#
+    conn.close()
+
+def make_question_column_unique():
+    # データベースに接続
+    conn = sqlite3.connect('example.sqlite')
+    c = conn.cursor()
+
+    # 新しいテーブルを作成し、`question`カラムに`UNIQUE`制約を設定
+    c.execute('''
+    CREATE TABLE IF NOT EXISTS new_questions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        category TEXT,
+        question TEXT UNIQUE,
+        answer TEXT,
+        created_at DATETIME,
+        answer_at DATETIME
+    )
+    ''')
+
+    # 既存のデータを新しいテーブルに移行（重複する`question`のデータは除外）
+    c.execute('''
+    INSERT INTO new_questions (id, category, question, answer, created_at, answer_at)
+    SELECT id, category, question, answer, created_at, answer_at FROM questions
+    GROUP BY question
+    ''')
+
+    # 既存のテーブルを削除
+    c.execute('DROP TABLE questions')
+
+    # 新しいテーブルの名前を変更
+    c.execute('ALTER TABLE new_questions RENAME TO questions')
+
+    # 変更をコミット
+    conn.commit()
+
     # データベース接続を閉じる
     conn.close()
+
+#make_question_column_unique()
